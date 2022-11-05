@@ -1,7 +1,6 @@
 // compile using this command
 // g++ -std=c++20 main.cpp -lglfw -lGL -lglut -lGLEW -pthread -o test
 
-
 #include<thread>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,19 +18,19 @@ using namespace glm;
 
 // ----------------------------------------------------------------
 auto randomF() {
-    struct re {
+    struct re { 
         float a;
-        float b;
-        float c;
+    float b;
+    float c;
     };
-    srand((unsigned int)time(NULL)); //activates the generator
-    float r = ((float)rand() / (RAND_MAX));
+    srand((unsigned int) time (NULL)); //activates the generator
+    float r = ((float) rand() / (RAND_MAX));  
     r = floorf(r * 10) / 10;
-    float r1 = ((float)rand() / (RAND_MAX));
+    float r1 = ((float) rand() / (RAND_MAX));  
     r1 = floorf(r1 * 10) / 10;
-    float r2 = ((float)rand() / (RAND_MAX));
+    float r2 = ((float) rand() / (RAND_MAX));  
     r2 = floorf(r2 * 10) / 10;
-    return re{ r,r1,r2 };
+    return re {r,r1,r2};
 }
 
 // ----------------------------------------------------------------
@@ -39,128 +38,125 @@ auto randomF() {
 // ----------------------------------------------------------------
 
 // each shape func take 2 inputs color and size
-void triangle(int color, float size, int number) {
+void triangle(int color ,float size ,int number){
     //----- same for each func -------
-    auto [r, g, b] = randomF();
+    auto [r,g,b] = randomF();
     float tx = 0;
     float ty = 0;
-    if (color == 1)
+    if (color == 1) 
         glColor3f(1.0f, 0.0f, 0.0f);
     else if (color == 2)
         glColor3f(0.0f, 1.0f, 0.0f);
     else if (color == 3)
         glColor3f(0.0f, 0.0f, 1.0f);
     else if (color == 4)
-        glColor3f(r, g, b);
+        glColor3f(r, g, b);    
 
-    glScalef(size, size, 0.0f);
-
+    glScalef(size,size,0.0f);
+    
     if (number > 0)
         for (int i = 0; i < number; i++) {
-
-            glTranslatef(tx, ty, 0);
+            
+            glTranslatef(tx,ty,0);
 
             glBegin(GL_POLYGON);                // Begin drawing the Traingle
-
-            glVertex3f(-0.1f, 0.1f, 0);
-            glVertex3f(0.0f, 0.4f, 0);
-            glVertex3f(0.1f, 0.1f, 0);
+    
+            glVertex3f( -0.1f, 0.1f, 0); 
+            glVertex3f( 0.0f, 0.4f, 0); 
+            glVertex3f( 0.1f, 0.1f, 0);
 
             glEnd();
 
             tx += 0.2f;
             ty += 0.2f;
-        }
+        }    
 
-    else
-        //---------------------------------
-            // start drawing the shape
+    else    
+    //---------------------------------
+        // start drawing the shape
         glBegin(GL_POLYGON);                // Begin drawing the Traingle
+    
+            glVertex3f( -0.1f, 0.1f, 0); 
+            glVertex3f( 0.0f, 0.4f, 0); 
+            glVertex3f( 0.1f, 0.1f, 0);
 
-    glVertex3f(-0.1f, 0.1f, 0);
-    glVertex3f(0.0f, 0.4f, 0);
-    glVertex3f(0.1f, 0.1f, 0);
-
-    glEnd();
+        glEnd();
 
 }
 
-void circle() {
+void circle(){
     float j, k;
-    GLfloat x, y, z, a = 0.60, b = 0.60, c = 1.3;
-    GLfloat twicePi = 2.0f * 3.14;
-    glColor3f(0.2f, 0.0f, 0.7f);
+        GLfloat x, y, z, a = 0.60, b = 0.60, c = 1.3;
+        GLfloat twicePi = 2.0f * 3.14;
+        glColor3f(0.2f, 0.0f, 0.7f);
 
-    glBegin(GL_POLYGON);
-    for (k = 0; k <= 3.14; k += 0.01) {
-        for (j = 0; j <= twicePi; j += 0.01) {
-            x = (a * sin(k) * cos(j));
-            y = (b * sin(k) * sin(j));
-            z = c * cos(k);
-            glVertex3f(x, y, z);
-        }
-    }
-    glEnd();
+        glBegin(GL_POLYGON);
+        for (k = 0; k <= 3.14; k += 0.01) {
+            for (j = 0; j <= twicePi; j += 0.01) {
+                x = (a * sin(k) * cos(j));
+                y = (b * sin(k) * sin(j));
+                z = c * cos(k);
+                glVertex3f(x, y, z);
+            }
+        }       
+        glEnd();
 }
 
+// TODO add square shape func
 
-void square(int color, float size, int number) {
+void rectangle(int color ,float size ,int number){
     //----- same for each func -------
-    auto [r, g, b] = randomF();
+    auto [r,g,b] = randomF();
     float tx = 0;
     float ty = 0;
-    if (color == 1)
+    if (color == 1) 
         glColor3f(1.0f, 0.0f, 0.0f);
     else if (color == 2)
         glColor3f(0.0f, 1.0f, 0.0f);
     else if (color == 3)
         glColor3f(0.0f, 0.0f, 1.0f);
     else if (color == 4)
-        glColor3f(r, g, b);
+        glColor3f(r, g, b);    
 
-    glScalef(size, size, 0.0f);
-
+    glScalef(size,size,0.0f);
+    
     if (number > 0)
         for (int i = 0; i < number; i++) {
+            
+            glTranslatef(tx,ty,0);
 
-            glTranslatef(tx, ty, 0);
+            glBegin(GL_POLYGON);                // Begin drawing the rectangle
 
-            glBegin(GL_POLYGON);                // Begin drawing the Square
-
-            glVertex3f(-0.1f, 0.5f, 0);
-            glVertex3f(0.1f, 0.5f, 0);
-            glVertex3f(0.1f, -0.1f, 0);
-            glVertex3f(-0.1f, -0.1f, 0);
-
-
+                glVertex3f( -0.1f, 0.1f, 0);
+                glVertex3f( -0.1f, 0.4f, 0);
+                glVertex3f( 0.3f, 0.4f, 0);
+                glVertex3f( 0.3f, 0.1f, 0);
+            
             glEnd();
 
             tx += 0.2f;
             ty += 0.2f;
-        }
+        }    
 
-    else
-        //---------------------------------
-            // start drawing the shape
-        glBegin(GL_POLYGON);                // Begin drawing the Square
+    else    
+    //---------------------------------
+        // start drawing the shape
+        glBegin(GL_POLYGON);                // Begin drawing the rectangle
+    
+            glVertex3f( -0.1f, 0.1f, 0);
+            glVertex3f( -0.1f, 0.4f, 0);
+            glVertex3f( 0.3f, 0.4f, 0);
+            glVertex3f( 0.3f, 0.1f, 0);
 
-    glVertex3f(-0.1f, 0.5f, 0);
-    glVertex3f(0.1f, 0.5f, 0);
-    glVertex3f(0.1f, -0.1f, 0);
-    glVertex3f(-0.1f, -0.1f, 0);
-
-    glEnd();
+        glEnd();
 
 }
-
-
-// TODO add rectangle shape func
 
 // ----------------------------------------------------------------
 // ------------------draw Func-------------------------------------
 // ----------------------------------------------------------------
 
-int draw(int color, float size, int number, void (*func)(int, float, int))
+int draw(int color,float size,int number,void (*func)(int,float,int))
 {
     // Initialise GLFW
     if (!glfwInit())
@@ -215,13 +211,12 @@ int draw(int color, float size, int number, void (*func)(int, float, int))
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
 
+    // ----------------here draw---------------
+        func(color,size,number);
+        
 
-        // ----------------here draw---------------
-        func(color, size, number);
-
-
-        // --------------------------------------
-            // Swap buffers
+    // --------------------------------------
+        // Swap buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
 
@@ -236,7 +231,7 @@ int draw(int color, float size, int number, void (*func)(int, float, int))
     return 0;
 }
 
-int main(void)
+int main( void )
 {
     int mLOOP = 1;
     int sLOOP = 1;
@@ -244,14 +239,13 @@ int main(void)
 
     int mSwitch;
     int sSwitch;
-
+    
     int cSelect;
     float sSelect;
     int nSelect;
     int YorN;
 
-
-    while (mLOOP == 1) {
+    while (mLOOP == 1){
         sLOOP = 1;
         cout << "---------------------- \n";
         cout << "select opreation to do \n";
@@ -264,7 +258,7 @@ int main(void)
         switch (mSwitch)
         {
         case 1: // select one shape opreation 
-            while (sLOOP == 1) {
+            while (sLOOP == 1){
                 sLOOP = 1;
                 cout << "---------------------- \n";
                 cout << "select shape \n";
@@ -278,8 +272,7 @@ int main(void)
                 switch (sSwitch)
                 {
                 case 1: // select triangle shape opreation
-                    while (cLOOP == 1) {
-                        //TODO add validator for cSelect , sSelect 
+                    while (cLOOP == 1){
                         cout << "---------------------- \n";
                         cout << "select shape color \n";
                         cout << "---------------------- \n";
@@ -288,13 +281,29 @@ int main(void)
                         cout << "(3) blue \n";
                         cout << "(4) random \n";
                         cin >> cSelect;
+
+                        if(cSelect < 1 || cSelect > 4){
+                            cout << "----------------------------- \n"; 
+                            cout << "Please enter a valid color\n";
+                            cout << "----------------------------- \n"; 
+                            continue;
+                        }
+
                         cout << "---------------------- \n";
                         cout << "enter shape size \n";
                         cout << "enter postive number  \n";
                         cout << "high num = bigger shape  \n";
-                        cout << "---------------------- \n";
+                        cout << "---------------------- \n";  
                         cin >> sSelect;
-                        std::thread thread(draw, cSelect, sSelect, 0, triangle); // just change shape func name
+
+                        if(sSelect < 1){
+                            cout << "----------------------------- \n"; 
+                            cout << "Please enter a valid size\n";
+                            cout << "----------------------------- \n"; 
+                            continue;
+                        }
+
+                        std::thread thread (draw,cSelect,sSelect,0,triangle); // just change shape func name
                         thread.detach();
                         cout << "---------------------- \n";
                         cout << "draw shape with another color ? \n";
@@ -302,25 +311,27 @@ int main(void)
                         cout << "(1) yes \n";
                         cout << "(2) no \n";
                         cin >> YorN;
-                        if (thread.joinable()) {
-                            thread.join();
-                        }
-
-                        if (YorN == 2) {
-                            cLOOP == 0;
+                        if (thread.joinable()){
+                            thread.join();}
+                         
+                        if (YorN == 2){
+                            cLOOP = 0;
                             break;
                         }
                         else
                         {
                             cLOOP = 1;
                         }
-                    }
+                        }
                 case 2:
                     // TODO add circle logic here
                     break;
                 case 3:
-                    while (cLOOP == 1) {
-                        //TODO add validator for cSelect , sSelect 
+                    // TODO add square logic here
+                    break;
+                case 4:
+                    
+                    while (cLOOP == 1){
                         cout << "---------------------- \n";
                         cout << "select shape color \n";
                         cout << "---------------------- \n";
@@ -329,13 +340,29 @@ int main(void)
                         cout << "(3) blue \n";
                         cout << "(4) random \n";
                         cin >> cSelect;
+
+                        if(cSelect < 1 || cSelect > 4){
+                            cout << "---------------------------- \n"; 
+                            cout << "Please enter a valid color\n";
+                            cout << "---------------------------- \n"; 
+                            continue;
+                        }
+
                         cout << "---------------------- \n";
                         cout << "enter shape size \n";
                         cout << "enter postive number  \n";
                         cout << "high num = bigger shape  \n";
-                        cout << "---------------------- \n";
+                        cout << "---------------------- \n";  
                         cin >> sSelect;
-                        std::thread thread(draw, cSelect, sSelect, 0, square); // just change shape func name
+
+                        if(sSelect < 1){
+                            cout << "-------------------------- \n"; 
+                            cout << "Please enter a valid size\n";
+                            cout << "-------------------------- \n"; 
+                            continue;
+                        }
+
+                        std::thread thread (draw,cSelect,sSelect,0,rectangle); // just change shape func name
                         thread.detach();
                         cout << "---------------------- \n";
                         cout << "draw shape with another color ? \n";
@@ -343,33 +370,30 @@ int main(void)
                         cout << "(1) yes \n";
                         cout << "(2) no \n";
                         cin >> YorN;
-                        if (thread.joinable()) {
-                            thread.join();
-                        }
-
-                        if (YorN == 2) {
-                            cLOOP == 0;
+                        if (thread.joinable()){
+                            thread.join();}
+                         
+                        if (YorN == 2){
+                            cLOOP = 0;
                             break;
                         }
                         else
                         {
                             cLOOP = 1;
                         }
-                    }
-                    break;
-                case 4:
-                    // TODO add rectangle logic here
-                    break;
-                case 5:
+                        }
+
+                    break;                                               
+                case 5: 
                     sLOOP = 0;
                     break;
                 default:
                     cout << "Please enter number between 1 and 5 \n";
                     break;
                 }
-            }
+            } 
         case 2: // select multiple shape opreation
-            while (sLOOP == 1) {
+            while (sLOOP == 1){
                 sLOOP = 1;
                 cout << "---------------------- \n";
                 cout << "select shape \n";
@@ -383,7 +407,7 @@ int main(void)
                 switch (sSwitch)
                 {
                 case 1: // select triangle shape opreation
-                    while (cLOOP == 1) {
+                    while (cLOOP == 1){
                         //TODO add validator for cSelect , sSelect 
                         cout << "---------------------- \n";
                         cout << "select shape color \n";
@@ -393,18 +417,42 @@ int main(void)
                         cout << "(3) blue \n";
                         cout << "(4) random \n";
                         cin >> cSelect;
+
+                        if(cSelect < 1 || cSelect > 4){
+                            cout << "---------------------------- \n"; 
+                            cout << "Please enter a valid color\n";
+                            cout << "---------------------------- \n"; 
+                            continue;
+                        }
+
                         cout << "---------------------- \n";
                         cout << "enter shape size \n";
                         cout << "enter postive number  \n";
                         cout << "high num = bigger shape  \n";
-                        cout << "---------------------- \n";
+                        cout << "---------------------- \n";  
                         cin >> sSelect;
+
+                        if(sSelect < 1){
+                            cout << "----------------------------- \n"; 
+                            cout << "Please enter a valid size\n";
+                            cout << "----------------------------- \n"; 
+                            continue;
+                        }
+
                         cout << "---------------------- \n";
                         cout << "enter number of shapes \n";
                         cout << "enter postive number  \n";
-                        cout << "---------------------- \n";
+                        cout << "---------------------- \n";  
                         cin >> nSelect;
-                        std::thread thread(draw, cSelect, sSelect, nSelect, triangle); // just change shape func name
+
+                        if(nSelect < 1){
+                            cout << "----------------------------- \n"; 
+                            cout << "Please enter a valid number\n";
+                            cout << "----------------------------- \n"; 
+                            continue;
+                        }
+
+                        std::thread thread (draw,cSelect,sSelect,nSelect,triangle); // just change shape func name
                         thread.detach();
                         cout << "---------------------- \n";
                         cout << "draw shape with another color ? \n";
@@ -412,24 +460,27 @@ int main(void)
                         cout << "(1) yes \n";
                         cout << "(2) no \n";
                         cin >> YorN;
-                        if (thread.joinable()) {
-                            thread.join();
-                        }
-
-                        if (YorN == 2) {
-                            cLOOP == 0;
+                        if (thread.joinable()){
+                            thread.join();}
+                         
+                        if (YorN == 2){
+                            cLOOP = 0;
                             break;
                         }
                         else
                         {
                             cLOOP = 1;
                         }
-                    }
+                        }
                 case 2:
                     // TODO add circle logic here
                     break;
                 case 3:
-                    while (cLOOP == 1) {
+                    // TODO add square logic here
+                    break;
+                case 4:
+                    
+                    while (cLOOP == 1){
                         //TODO add validator for cSelect , sSelect 
                         cout << "---------------------- \n";
                         cout << "select shape color \n";
@@ -439,18 +490,42 @@ int main(void)
                         cout << "(3) blue \n";
                         cout << "(4) random \n";
                         cin >> cSelect;
+
+                        if(cSelect < 1 || cSelect > 4){
+                            cout << "----------------------------- \n"; 
+                            cout << "Please enter a valid color\n";
+                            cout << "----------------------------- \n"; 
+                            continue;
+                        }
+
                         cout << "---------------------- \n";
                         cout << "enter shape size \n";
                         cout << "enter postive number  \n";
                         cout << "high num = bigger shape  \n";
-                        cout << "---------------------- \n";
+                        cout << "---------------------- \n";  
                         cin >> sSelect;
+
+                        if(sSelect < 1){
+                            cout << "----------------------------- \n"; 
+                            cout << "Please enter a valid size\n";
+                            cout << "----------------------------- \n"; 
+                            continue;
+                        }
+
                         cout << "---------------------- \n";
                         cout << "enter number of shapes \n";
                         cout << "enter postive number  \n";
-                        cout << "---------------------- \n";
+                        cout << "---------------------- \n";  
                         cin >> nSelect;
-                        std::thread thread(draw, cSelect, sSelect, nSelect, square); // just change shape func name
+
+                        if(nSelect < 1){
+                            cout << "----------------------------- \n"; 
+                            cout << "Please enter a valid number\n";
+                            cout << "----------------------------- \n"; 
+                            continue;
+                        }
+                        
+                        std::thread thread (draw,cSelect,sSelect,nSelect,rectangle); // just change shape func name
                         thread.detach();
                         cout << "---------------------- \n";
                         cout << "draw shape with another color ? \n";
@@ -458,23 +533,22 @@ int main(void)
                         cout << "(1) yes \n";
                         cout << "(2) no \n";
                         cin >> YorN;
-                        if (thread.joinable()) {
-                            thread.join();
-                        }
-
-                        if (YorN == 2) {
-                            cLOOP == 0;
+                        if (thread.joinable()){
+                            thread.join();}
+                         
+                        if (YorN == 2){
+                            cLOOP = 0;
                             break;
                         }
                         else
                         {
                             cLOOP = 1;
                         }
-                    }                    break;
-                case 4:
-                    // TODO add rectangle logic here
-                    break;
-                case 5:
+                        }
+
+                    
+                    break;                                               
+                case 5: 
                     sLOOP = 0;
                     break;
                 default:
@@ -491,3 +565,5 @@ int main(void)
         }
     }
 }
+
+
